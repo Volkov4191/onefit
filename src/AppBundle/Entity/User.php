@@ -35,4 +35,40 @@ class User extends BaseUser
     public function __construct(){
         parent::__construct();
     }
+
+    /**
+     * @param mixed $facebook_id
+     * @return User
+     */
+    public function setFacebookId($facebook_id)
+    {
+        $this->facebook_id = $facebook_id;
+        return $this;
+    }
+
+    /**
+     * @param mixed $facebook_access_token
+     * @return User
+     */
+    public function setFacebookAccessToken($facebook_access_token)
+    {
+        $this->facebook_access_token = $facebook_access_token;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFacebookId()
+    {
+        return $this->facebook_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFacebookAccessToken()
+    {
+        return $this->facebook_access_token;
+    }
 }

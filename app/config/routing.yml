@@ -19,4 +19,4 @@ hwi_oauth_redirect:
     prefix:   /login
 
 facebook_login:
-    path: /login/facebook
+    path: /facebook
