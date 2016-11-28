@@ -7,11 +7,11 @@
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ chatMessage.id }}</td>
+                <td>{{ message.id }}</td>
             </tr>
             <tr>
                 <th>Text</th>
-                <td>{{ chatMessage.text }}</td>
+                <td>{{ message.text }}</td>
             </tr>
         </tbody>
     </table>
@@ -21,7 +21,7 @@
             <a href="{{ path('message_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('message_edit', { 'id': chatMessage.id }) }}">Edit</a>
+            <a href="{{ path('message_edit', { 'id': message.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

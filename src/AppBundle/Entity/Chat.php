@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups as Groups;
 
 /**
  * Class Chat
@@ -43,6 +44,7 @@ class Chat
     /**
      * Get id
      *
+     * @Groups({"Default"})
      * @return integer
      */
     public function getId()
@@ -67,6 +69,7 @@ class Chat
     /**
      * Get name
      *
+     * @Groups({"Default"})
      * @return string
      */
     public function getName()

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups as Groups;
 
 /**
  * Class ChatMessage
@@ -39,6 +40,7 @@ class ChatMessage
     /**
      * Get id
      *
+     * @Groups({"Default"})
      * @return integer
      */
     public function getId()
@@ -63,6 +65,7 @@ class ChatMessage
     /**
      * Get text
      *
+     * @Groups({"Default"})
      * @return string
      */
     public function getText()
@@ -87,6 +90,7 @@ class ChatMessage
     /**
      * Get chat
      *
+     * @Groups({"Default"})
      * @return \AppBundle\Entity\Chat
      */
     public function getChat()
@@ -111,6 +115,7 @@ class ChatMessage
     /**
      * Get user
      *
+     * @Groups({"Default"})
      * @return \AppBundle\Entity\User
      */
     public function getUser()

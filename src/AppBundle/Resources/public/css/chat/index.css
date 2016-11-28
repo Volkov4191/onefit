@@ -1,0 +1,52 @@
+.contact .status .online{
+    background-color: #2ABB63;
+}
+.contact .status .offline{
+    background-color: #E25953;
+}
+.contact .status div{
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.contact{
+    padding: 20px 10px;
+    background-color: #F2F5F6;
+}
+.contact .status{
+    width: 15px;
+}
+.contact .avatar{
+    width: 70px;
+}
+.contact .avatar img{
+    max-height: 70px;
+    max-width:  70px;
+    border-radius: 50%;
+}
+
+.message .avatar{
+    width: 100px;
+}
+.message .avatar img{
+    max-height: 70px;
+    max-width:  70px;
+    border-radius: 50%;
+}
+.message{
+    padding: 15px 0;
+}
+.message .date{
+    color: #c3c7c8
+}
+.my.message .text{
+    background-color: #f2f5f6;
+    color: #a6abae;
+}
+.message .text{
+    background-color: #00a7eb;
+    color: #def0fb;
+    padding: 20px 25px;
+}

@@ -2,8 +2,8 @@
 
 namespace AppBundle\Form;
 
+use Qbbr\EntityHiddenTypeBundle\Form\Type\EntityHiddenType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,8 +16,12 @@ class ChatMessageType extends AbstractType
     {
         $builder
             ->add('text')
-            ->add('chat', HiddenType::class)
-            ->add('user', HiddenType::class)
+            ->add('chat', EntityHiddenType::class, [
+                'class' => \AppBundle\Entity\Chat::class
+            ])
+            ->add('user', EntityHiddenType::class,  [
+                'class' => \AppBundle\Entity\User::class
+            ])
         ;
     }
     

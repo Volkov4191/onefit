@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {% stylesheets '@AppBundle/Resources/public/css/chat/*' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
 {% block body %}
     <h1>Chatmessages list</h1>
 
@@ -12,7 +18,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for chatMessage in chatMessages %}
+        {% for chatMessage in items %}
             <tr>
                 <td><a href="{{ path('message_show', { 'id': chatMessage.id }) }}">{{ chatMessage.id }}</a></td>
                 <td>{{ chatMessage.text }}</td>
@@ -36,4 +42,128 @@
             <a href="{{ path('message_new') }}">Create a new chatMessage</a>
         </li>
     </ul>
+
+
+    <div class="container-fluid">
+        <!-- Image and text -->
+        <nav class="navbar navbar-light bg-faded">
+            <a class="navbar-brand" href="#">
+                <img src="http://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                Bootstrap
+            </a>
+
+            <ul class="nav navbar-nav float-xs-right">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Изменить профиль</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Написать комментарий</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Выйти</a>
+                </li>
+            </ul>
+        </nav>
+
+
+        <div class="row">
+            <div class="col-xs-2 ">
+                <table  class="table">
+                    <tbody>
+                    <tr class="contact">
+                        <td class="align-middle status">
+                            <div class=" online"></div>
+                        </td>
+                        <td class="align-middle avatar">
+                                        <span>
+                                            <img src="http://wallpaperscraft.ru/image/dzhordzh_kluni_akter_ulybka_pidzhak_muzhchina_sedovolosyj_98903_300x300.jpg" class="img-responsive" >
+                                        </span>
+                        </td>
+                        <td class="align-middle col-xs text-center">
+                            <span class="font-weight-bold">Jennifer Hong</span>
+                        </td>
+                    </tr>
+                    <tr class="contact">
+                        <td class="align-middle status">
+                            <div class=" offline"></div>
+                        </td>
+                        <td class="align-middle avatar">
+                                        <span>
+                                            <img src="http://wallpaperscraft.ru/image/dzhordzh_kluni_akter_ulybka_pidzhak_muzhchina_sedovolosyj_98903_300x300.jpg" class="img-responsive" >
+                                        </span>
+                        </td>
+                        <td class="align-middle col-xs text-center">
+                            <span class="font-weight-bold">Jennifer Hong</span>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="col-xs-10">
+
+                {% for item in items %}
+                    <div class="row my message">
+                        <div class="col-xs-1 avatar">
+                            <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQDWQyBo2yABb-H1iiMUm33OAIU3nCHV6X8T9PT_DL-1_ARMWA4" class="img-responsive ">
+                        </div>
+                        <div class="col-xs-10">
+                            <div class="row">
+                                <div class="col-xs-10 text rounded">
+                                    <span>{{ item.text }}</span>
+                                </div>
+                                <div class="col-xs-2"></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-1 date">
+                            19:20
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+                <div class="row message">
+                    <div class="col-xs-1 date">
+                        19:20
+                    </div>
+
+                    <div class="col-xs-10">
+                        <div class="row">
+                            <div class="col-xs-2"></div>
+                            <div class="col-xs-10 text rounded" >
+                                    <span>
+                                    Интеграл Дирихле стабилизирует убывающий двойной интеграл, в итоге приходим к логическому противоречию. Постулат, не вдаваясь в подробности, стремительно программирует невероятный математический анализ. Представляется логичным, что функция выпуклая книзу порождает невероятный постулат.
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-1 avatar">
+                        <img src="http://wallpaperscraft.ru/image/odri_totu_devushka_litso_aktrisa_ulybka_102349_300x300.jpg" class="img-responsive " >
+                    </div>
+                </div>
+
+                <div >
+                    {% if messageForm is defined %}
+                        {{ form_start(messageForm, {'action': path('v1_post_message', {'_format' : 'json'}), 'attr': {'class' : 'message-form'}}) }}
+                            <div class="form-group col-xs-11">
+                                {{ form_widget(messageForm.text, {'attr' : {'rows' : 5, 'class' : 'form-control'}}) }}
+                            </div>
+                            <div class="col-xs-1">
+                                <button type="submit" class="btn btn-primary">Отправить</button>
+                            </div>
+                        {{ form_end(messageForm) }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {% javascripts '@AppBundle/Resources/public/js/chat/*' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}

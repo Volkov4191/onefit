@@ -109,3 +109,9 @@ fos_rest:
     serializer:
         groups: ["Default"]
         serialize_null: true
+
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~

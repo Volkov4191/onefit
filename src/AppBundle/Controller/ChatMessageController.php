@@ -27,7 +27,7 @@ class ChatMessageController extends Controller
         $chatMessages = $em->getRepository('AppBundle:ChatMessage')->findAll();
 
         return $this->render('AppBundle:message:index.html.twig', array(
-            'chatMessages' => $chatMessages,
+            'items' => $chatMessages,
         ));
     }
 
