@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -31,6 +32,12 @@ class User extends BaseUser
      * @ORM\Column(name="facebook_access_token", type="string", length=255, nullable=true)
      */
     protected $facebook_access_token;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ChatMessage", mappedBy="user", cascade={"persist"})
+     * @var ArrayCollection
+     */
+    private $messages;
 
     public function __construct(){
         parent::__construct();

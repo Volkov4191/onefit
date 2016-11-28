@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Chatmessages list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Text</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for chatMessage in chatMessages %}
+            <tr>
+                <td><a href="{{ path('message_show', { 'id': chatMessage.id }) }}">{{ chatMessage.id }}</a></td>
+                <td>{{ chatMessage.text }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('message_show', { 'id': chatMessage.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('message_edit', { 'id': chatMessage.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('message_new') }}">Create a new chatMessage</a>
+        </li>
+    </ul>
+{% endblock %}
