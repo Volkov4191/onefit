@@ -26,7 +26,7 @@ class ChatController extends Controller
 
         $chats = $em->getRepository('AppBundle:Chat')->findAll();
 
-        return $this->render('chat/index.html.twig', array(
+        return $this->render('AppBundle:chat:index.html.twig', array(
             'chats' => $chats,
         ));
     }
@@ -51,7 +51,7 @@ class ChatController extends Controller
             return $this->redirectToRoute('chat_show', array('id' => $chat->getId()));
         }
 
-        return $this->render('chat/new.html.twig', array(
+        return $this->render('AppBundle:chat:new.html.twig', array(
             'chat' => $chat,
             'form' => $form->createView(),
         ));
@@ -67,7 +67,7 @@ class ChatController extends Controller
     {
         $deleteForm = $this->createDeleteForm($chat);
 
-        return $this->render('chat/show.html.twig', array(
+        return $this->render('AppBundle:chat:show.html.twig', array(
             'chat' => $chat,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -91,7 +91,7 @@ class ChatController extends Controller
             return $this->redirectToRoute('chat_edit', array('id' => $chat->getId()));
         }
 
-        return $this->render('chat/edit.html.twig', array(
+        return $this->render('AppBundle:chat:edit.html.twig', array(
             'chat' => $chat,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

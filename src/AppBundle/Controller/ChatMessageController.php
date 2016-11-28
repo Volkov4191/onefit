@@ -26,7 +26,7 @@ class ChatMessageController extends Controller
 
         $chatMessages = $em->getRepository('AppBundle:ChatMessage')->findAll();
 
-        return $this->render('chatmessage/index.html.twig', array(
+        return $this->render('AppBundle:message:index.html.twig', array(
             'chatMessages' => $chatMessages,
         ));
     }
@@ -51,7 +51,7 @@ class ChatMessageController extends Controller
             return $this->redirectToRoute('message_show', array('id' => $chatMessage->getId()));
         }
 
-        return $this->render('chatmessage/new.html.twig', array(
+        return $this->render('AppBundle:message:new.html.twig', array(
             'chatMessage' => $chatMessage,
             'form' => $form->createView(),
         ));
@@ -67,7 +67,7 @@ class ChatMessageController extends Controller
     {
         $deleteForm = $this->createDeleteForm($chatMessage);
 
-        return $this->render('chatmessage/show.html.twig', array(
+        return $this->render('AppBundle:message:show.html.twig', array(
             'chatMessage' => $chatMessage,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -91,7 +91,7 @@ class ChatMessageController extends Controller
             return $this->redirectToRoute('message_edit', array('id' => $chatMessage->getId()));
         }
 
-        return $this->render('chatmessage/edit.html.twig', array(
+        return $this->render('AppBundle:message:edit.html.twig', array(
             'chatMessage' => $chatMessage,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

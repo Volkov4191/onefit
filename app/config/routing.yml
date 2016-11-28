@@ -2,9 +2,14 @@ app:
     resource: "@AppBundle/Controller/"
     type:     annotation
 
+api:
+    type: rest
+    resource: "@AppBundle/Controller/API"
+    defaults: {_format: 'html'}
+
+
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-
 
 hwi_oauth_security:
     resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
