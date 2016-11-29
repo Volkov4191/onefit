@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4f7e17b643421ff8f54801f2d395de71",
-    "content-hash": "7478cc2805782832101942af4901e4d8",
+    "hash": "41434cfe02bcae096263c24b58f79f91",
+    "content-hash": "d1a2bcdd677f1f84a5cd7c8c2839c903",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -776,6 +776,64 @@
             "time": "2016-09-10 18:51:13"
         },
         {
+            "name": "friendsofsymfony/jsrouting-bundle",
+            "version": "1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSJsRoutingBundle.git",
+                "reference": "2f52d924692647db02bbcb27c159fef03bf000c9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/2f52d924692647db02bbcb27c159fef03bf000c9",
+                "reference": "2f52d924692647db02bbcb27c159fef03bf000c9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/console": "~2.0|3.*",
+                "symfony/framework-bundle": "~2.0|3.*",
+                "symfony/serializer": "~2.0|3.*",
+                "willdurand/jsonp-callback-validator": "~1.0"
+            },
+            "require-dev": {
+                "symfony/expression-language": "~2.4|3.*"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FOS\\JsRoutingBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/friendsofsymfony/FOSJsRoutingBundle/contributors"
+                },
+                {
+                    "name": "William Durand",
+                    "email": "william.durand1@gmail.com"
+                }
+            ],
+            "description": "A pretty nice way to expose your Symfony2 routing to client applications.",
+            "homepage": "http://friendsofsymfony.github.com",
+            "keywords": [
+                "Js Routing",
+                "javascript",
+                "routing"
+            ],
+            "time": "2015-10-28 15:08:39"
+        },
+        {
             "name": "friendsofsymfony/rest-bundle",
             "version": "2.1.1",
             "source": {
@@ -878,12 +936,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "d95bd92eb23d113b54830a6e98bc154c7da635a9"
+                "reference": "28151dcb25de663c05ce26917fd6a0b5cb2787cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/d95bd92eb23d113b54830a6e98bc154c7da635a9",
-                "reference": "d95bd92eb23d113b54830a6e98bc154c7da635a9",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/28151dcb25de663c05ce26917fd6a0b5cb2787cf",
+                "reference": "28151dcb25de663c05ce26917fd6a0b5cb2787cf",
                 "shasum": ""
             },
             "require": {
@@ -944,7 +1002,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2016-11-28 08:38:47"
+            "time": "2016-11-29 14:53:27"
         },
         {
             "name": "hwi/oauth-bundle",
@@ -2619,47 +2677,6 @@
         }
     ],
     "packages-dev": [
-        {
-            "name": "glifery/entity-hidden-type-bundle",
-            "version": "1.2.1",
-            "target-dir": "Glifery/EntityHiddenTypeBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Glifery/EntityHiddenTypeBundle.git",
-                "reference": "656dfe4d1da32a62756333eda4c22bf29b78959e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Glifery/EntityHiddenTypeBundle/zipball/656dfe4d1da32a62756333eda4c22bf29b78959e",
-                "reference": "656dfe4d1da32a62756333eda4c22bf29b78959e",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0",
-                "symfony/framework-bundle": ">=2.3"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "Glifery\\EntityHiddenTypeBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Glifery",
-                    "email": "glifery@gmail.com"
-                }
-            ],
-            "description": "Hidden field for Symfony2 entities",
-            "keywords": [
-                "entity hidden form type symfony"
-            ],
-            "time": "2016-02-11 08:22:35"
-        },
         {
             "name": "sensio/generator-bundle",
             "version": "v3.1.1",

@@ -25,3 +25,6 @@ hwi_oauth_redirect:
 
 facebook_login:
     path: /facebook
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

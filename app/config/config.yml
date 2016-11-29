@@ -73,6 +73,12 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
     user_class: AppBundle\Entity\User
+    profile:
+        form:
+            type:               UserBundle\Form\Type\ProfileFormType # or 'fos_user_profile' on Symfony < 2.8
+            name:               fos_user_profile_form
+            validation_groups:  [Profile, Default]
+
 
 
 hwi_oauth:
@@ -115,3 +121,7 @@ assetic:
     use_controller: '%kernel.debug%'
     filters:
         cssrewrite: ~
+
+fos_js_routing:
+    routes_to_expose:
+        - "^v1_.*" # expose all routes with a name starting with v1_

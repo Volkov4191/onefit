@@ -1,0 +1,25 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+<div class="container">
+    <div class="omb_login">
+        <h3 class="omb_authTitle">Восстановление пароля</h3>
+
+        <div class="row omb_row-sm-offset-3">
+            <div class="col-xs-12 col-sm-6">
+
+                <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request omb_loginForm">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input type="text" id="username" name="username" required="required" placeholder="Логин" class="form-control" />
+                    </div>
+                    <br>
+
+                    <input type="submit" id="_submit" name="_submit" value="Выслать инструкции" class="btn btn-lg btn-success btn-block"/>
+
+                    <a class="btn btn-lg btn-primary btn-block" href="{{ path('hwi_oauth_service_redirect', {'service' : 'facebook'}) }}">Войти через Facebook</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -50,3 +50,9 @@
     color: #def0fb;
     padding: 20px 25px;
 }
+
+.message-list{
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}

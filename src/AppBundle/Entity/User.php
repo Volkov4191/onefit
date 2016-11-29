@@ -34,6 +34,16 @@ class User extends BaseUser
     protected $facebook_access_token;
 
     /**
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(name="second_name", type="string", length=255, nullable=true)
+     */
+    private $second_name;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\ChatMessage", mappedBy="user", cascade={"persist"})
      * @var ArrayCollection
      */
@@ -95,5 +105,87 @@ class User extends BaseUser
     public function getUsername()
     {
         return parent::getUsername();
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return User
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set secondName
+     *
+     * @param string $secondName
+     *
+     * @return User
+     */
+    public function setSecondName($secondName)
+    {
+        $this->second_name = $secondName;
+
+        return $this;
+    }
+
+    /**
+     * Get secondName
+     *
+     * @return string
+     */
+    public function getSecondName()
+    {
+        return $this->second_name;
+    }
+
+    /**
+     * Add message
+     *
+     * @param \AppBundle\Entity\ChatMessage $message
+     *
+     * @return User
+     */
+    public function addMessage(\AppBundle\Entity\ChatMessage $message)
+    {
+        $this->messages[] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Remove message
+     *
+     * @param \AppBundle\Entity\ChatMessage $message
+     */
+    public function removeMessage(\AppBundle\Entity\ChatMessage $message)
+    {
+        $this->messages->removeElement($message);
+    }
+
+    /**
+     * Get messages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMessages()
+    {
+        return $this->messages;
     }
 }

@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    {% stylesheets '@UserBundle/Resources/public/css/login.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+{% include "FOSUserBundle:Registration:register_content.html.twig" %}
+{% endblock body %}

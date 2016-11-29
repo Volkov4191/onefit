@@ -32,7 +32,8 @@
         "hwi/oauth-bundle": "^0.5.1",
         "friendsofsymfony/rest-bundle": "^2.0",
         "qbbr/entity-hidden-type-bundle": "^2.0",
-        "symfony/assetic-bundle": "^2.8"
+        "symfony/assetic-bundle": "^2.8",
+        "friendsofsymfony/jsrouting-bundle": "^1.6"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
