@@ -4,12 +4,9 @@
     <div class="omb_login">
         <h3 class="omb_authTitle">Редактирование профиля</h3>
 
-
         <div class="row omb_row-sm-offset-3">
             <div class="col-xs-12 col-sm-6">
                 {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit omb_loginForm' } }) }}
-
-
                     {{ form_errors(form.username) }}
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user "></i></span>
@@ -24,23 +21,22 @@
                     </div>
                     <br>
 
-                    {{ form_errors(form.name) }}
+                    {{ form_errors(form.first_name) }}
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        {{ form_widget(form.name, {'attr' : {'class' : 'form-control', 'placeholder' : 'Имя'}}) }}
+                        {{ form_widget(form.first_name, {'attr' : {'class' : 'form-control', 'placeholder' : 'Имя'}}) }}
                     </div>
                     <br>
 
-                    {{ form_errors(form.second_name) }}
+                    {{ form_errors(form.last_name) }}
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        {{ form_widget(form.second_name, {'attr' : {'class' : 'form-control', 'placeholder' : 'Фамилия'}}) }}
+                        {{ form_widget(form.last_name, {'attr' : {'class' : 'form-control', 'placeholder' : 'Фамилия'}}) }}
                     </div>
                     <br>
 
                     <input type="submit" id="_submit" name="_submit" value="Сохранить" class="btn btn-lg btn-success btn-block"/>
                     {{ form_widget(form) }}
-
                 {{ form_end(form) }}
             </div>
         </div>

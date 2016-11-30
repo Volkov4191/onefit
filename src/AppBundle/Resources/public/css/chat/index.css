@@ -21,18 +21,18 @@
 .contact .avatar{
     width: 70px;
 }
-.contact .avatar img{
-    max-height: 70px;
-    max-width:  70px;
+.contact .avatar div{
+    height: 70px;
+    width:  70px;
     border-radius: 50%;
 }
 
 .message .avatar{
     width: 100px;
 }
-.message .avatar img{
-    max-height: 70px;
-    max-width:  70px;
+.message .avatar div{
+    height: 60px;
+    width:  60px;
     border-radius: 50%;
 }
 .message{
@@ -55,4 +55,8 @@
     max-height: calc(100vh - 210px);
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+.message-form-container{
+    padding-left: 0;
 }

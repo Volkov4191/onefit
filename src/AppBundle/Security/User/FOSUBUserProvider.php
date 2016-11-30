@@ -1,16 +1,39 @@
 <?php
 namespace AppBundle\Security\User;
 
+use AppBundle\Entity\User;
+use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Security\Core\User\UserInterface;
+use UserBundle\Service\RandomizerInterface;
 
 /**
+ * Интегратор сервиса поддержки соцсетей и сервиса пользователей
+ *
  * Class FOSUBUserProvider
  * @package AppBundle\Security\User
  */
 class FOSUBUserProvider extends BaseClass
 {
+
+    /**
+     * @var RandomizerInterface
+     */
+    private $randomizer;
+    /**
+     * Constructor.
+     *
+     * @param UserManagerInterface $userManager FOSUB user provider.
+     * @param array                $properties  Property mapping.
+     */
+    public function __construct(UserManagerInterface $userManager, array $properties, RandomizerInterface $randomizer)
+    {
+        parent::__construct($userManager, $properties);
+        $this->randomizer = $randomizer;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -40,6 +63,7 @@ class FOSUBUserProvider extends BaseClass
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
         $username = $response->getUsername();
+        /** @var User $user */
         $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
         //when the user is registrating
         if (null === $user) {
@@ -56,7 +80,11 @@ class FOSUBUserProvider extends BaseClass
             $user->setUsername($username);
             $user->setEmail($username);
             $user->setPassword($username);
+            $user->setLastName($response->getLastName() ?: $this->randomizer->getLastName());
+            $user->setFirstName($response->getFirstName() ?: $this->randomizer->getFirstName());
+            $user->setColor($this->randomizer->getColor());
             $user->setEnabled(true);
+
             $this->userManager->updateUser($user);
             return $user;
         }

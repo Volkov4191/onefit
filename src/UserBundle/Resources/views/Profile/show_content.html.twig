@@ -1,6 +1,29 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div class="fos_user_user_show">
-    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
-    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+
+<div class="row mt-3">
+    <div class="col-xs-4"></div>
+    <div class="col-xs-4">
+        <table class="table table-striped">
+            <tbody>
+            <tr>
+                <th scope="row">ID</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Имя</th>
+                <td>{{ user.firstName }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Фамилия</th>
+                <td>{{ user.lastName }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Цвет</th>
+                <td bgcolor="{{ user.color }}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-xs-4"></div>
 </div>

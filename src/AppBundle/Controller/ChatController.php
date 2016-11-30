@@ -31,6 +31,7 @@ class ChatController extends Controller
         ));
     }
 
+
     /**
      * Creates a new chat entity.
      *
@@ -48,7 +49,7 @@ class ChatController extends Controller
             $em->persist($chat);
             $em->flush($chat);
 
-            return $this->redirectToRoute('chat_show', array('id' => $chat->getId()));
+            return $this->redirectToRoute('chat_messages', array('id' => $chat->getId()));
         }
 
         return $this->render('AppBundle:chat:new.html.twig', array(
@@ -116,6 +117,19 @@ class ChatController extends Controller
         }
 
         return $this->redirectToRoute('chat_index');
+    }
+
+    /**
+     * Deletes a chat entity.
+     *
+     * @Route("/{id}/messages", name="chat_messages")
+     * @Method("GET")
+     */
+    public function messagesAction(Chat $chat){
+        return $this->render('AppBundle:chat:messages.html.twig', array(
+            'chat'     => $chat,
+            'messages' => $chat->getMessages(),
+        ));
     }
 
     /**

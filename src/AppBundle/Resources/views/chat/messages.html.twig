@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {% stylesheets '@AppBundle/Resources/public/css/chat/*' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block menu %}
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <li class="nav-item">
+            <a class="nav-link write-comment" href="#">Написать комментарий</a>
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xs-2 ">
+            <table  class="table">
+                <tbody class="user-list">
+                    <tr>
+                        <td colspan="2">
+                            Загрузка...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="col-xs-10">
+            <div class="message-list mt-3">
+                <div class="alert alert-info">Загрузка комментариев...</div>
+            </div>
+
+            <div class="col-xs-12 message-form-container">
+                {% if messageForm is defined %}
+                    {% include '@App/message/form.html.twig' with {'form' : messageForm} %}
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+    {%  verbatim %}
+        <script id="tmpl-message-one" type="x-tmpl-mustache">
+            <div class="row my message">
+                <div class="col-xs-1 avatar">
+                    <div style="background-color: {{ message.user.color }}"></div>
+                </div>
+                <div class="col-xs-9">
+                    <div class="row">
+                        <div class="col-xs-10 text rounded">
+                            <span>{{ message.text }}</span>
+                        </div>
+                        <div class="col-xs-2"></div>
+                    </div>
+                </div>
+                <div class="col-xs-1 date text-xs-center">
+                    <div>{{ message.createdAt }}</div>
+                </div>
+                <div class="col-xs-1 date">
+                    {{#show_btn_edit}}
+                        <div><a href="{{ edit_url }}" class="message-edit btn btn-primary">Изменить</a></div>
+                    {{/show_btn_edit}}
+                </div>
+            </div>
+        </script>
+        <script id="tmpl-user-one" type="x-tmpl-mustache">
+            <tr class="contact">
+                <td class="align-middle avatar">
+                    <div style="background-color: {{ user.color }}"></div>
+                </td>
+                <td class="align-middle col-xs text-center">
+                    <span class="font-weight-bold"> {{ user.lastName }} {{ user.firstName }}</span>
+                </td>
+            </tr>
+        </script>
+        <script id="tmpl-no-message-alert" type="x-tmpl-mustache">
+            <div class="alert alert-success">Здесь будет выводиться история переписки.</div>
+        </script>
+
+    {% endverbatim %}
+
+{% endblock %}
+
+
+
+{% block javascripts %}
+    {% javascripts
+    '@AppBundle/Resources/public/js/chat/*'
+    '@AppBundle/Resources/public/js/jquery.slimscroll.min.js'
+    '@AppBundle/Resources/public/js/mustache.min.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+
+    <script>
+        {% set user_id = null %}
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {% set user_id = app.user.id %}
+        {% endif %}
+        $(function(){
+            var chatId = parseInt('{{ chat.id }}');
+
+            var chat = Chat.init({'id': '{{ chat.id }}', 'user_id' : '{{ user_id }}'});
+
+            Chat.refreshForm('{{ chat.id }}');
+            Chat.updateUserList('{{ chat.id }}');
+            Chat.updateMessageList(chatId);
+            setInterval(function(){
+                Chat.updateMessageList(chatId);
+            }, 5000);
+        });
+    </script>
+
+{% endblock %}

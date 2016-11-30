@@ -21,16 +21,15 @@
                 <img src="http://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
                 Bootstrap
             </a>
-
             <ul class="nav navbar-nav float-xs-right">
-
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('chat_index') }}">Чаты</a>
+                </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ path('fos_user_profile_edit') }}">Изменить профиль</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Написать комментарий</a>
-                </li>
+                {% block menu %}{% endblock %}
                 <li class="nav-item">
                     <a href="{{ path('fos_user_security_logout') }}" class="nav-link" >Выйти ({{ app.user.username }})</a>
                 </li>
@@ -41,7 +40,6 @@
                 {% endif %}
             </ul>
         </nav>
-
         {% block body %}{% endblock %}
 
     </div>
@@ -52,6 +50,5 @@
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 
     {% block javascripts %}{% endblock %}
-
     </body>
 </html>

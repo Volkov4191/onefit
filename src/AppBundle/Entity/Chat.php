@@ -117,4 +117,6 @@ class Chat
     public function __toString(){
         return $this->getName();
     }
+
+
 }

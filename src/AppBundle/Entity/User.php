@@ -13,6 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups as Groups;
  *
  * @ORM\Entity()
  * @ORM\Table(name="fos_user")
+ * @ORM\HasLifecycleCallbacks()
  */
 class User extends BaseUser
 {
@@ -34,14 +35,19 @@ class User extends BaseUser
     protected $facebook_access_token;
 
     /**
-     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="$first_name", type="string", length=255, nullable=true)
      */
-    private $name;
+    private $first_name;
 
     /**
-     * @ORM\Column(name="second_name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
      */
-    private $second_name;
+    private $last_name;
+
+    /**
+     * @ORM\Column(name="color", type="string", length=255, nullable=true)
+     */
+    private $color;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\ChatMessage", mappedBy="user", cascade={"persist"})
@@ -108,54 +114,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return User
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set secondName
-     *
-     * @param string $secondName
-     *
-     * @return User
-     */
-    public function setSecondName($secondName)
-    {
-        $this->second_name = $secondName;
-
-        return $this;
-    }
-
-    /**
-     * Get secondName
-     *
-     * @return string
-     */
-    public function getSecondName()
-    {
-        return $this->second_name;
-    }
-
-    /**
      * Add message
      *
      * @param \AppBundle\Entity\ChatMessage $message
@@ -187,5 +145,83 @@ class User extends BaseUser
     public function getMessages()
     {
         return $this->messages;
+    }
+
+    /**
+     * Set color
+     *
+     * @param string $color
+     *
+     * @return User
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * Get color
+     *
+     * @Groups({"Default"})
+     *
+     * @return string
+     */
+    public function getColor()
+    {
+        return $this->color;
+    }
+
+    /**
+     * Set firstName
+     *
+     * @param string $firstName
+     *
+     * @return User
+     */
+    public function setFirstName($firstName)
+    {
+        $this->first_name = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get firstName
+     *
+     * @Groups({"Default"})
+     *
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->first_name;
+    }
+
+    /**
+     * Set lastName
+     *
+     * @param string $lastName
+     *
+     * @return User
+     */
+    public function setLastName($lastName)
+    {
+        $this->last_name = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * Get lastName
+     *
+     * @Groups({"Default"})
+     *
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->last_name;
     }
 }

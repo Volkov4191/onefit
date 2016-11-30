@@ -10,6 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups as Groups;
  *
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ChatMessage")
  * @ORM\Table(name="chat_message")
+ * @ORM\HasLifecycleCallbacks()
  */
 class ChatMessage
 {
@@ -36,6 +37,11 @@ class ChatMessage
      * @ORM\Column(type="text", nullable=false)
      */
     private $text;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=false)
+     */
+    private $created_at;
 
     /**
      * Get id
@@ -121,5 +127,37 @@ class ChatMessage
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return ChatMessage
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @Groups({"Default"})
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function onPrePersist(){
+        return $this->setCreatedAt(new \DateTime());
     }
 }

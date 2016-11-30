@@ -1,0 +1,16 @@
+
+{% if form.vars.data.id %}
+    {% set label  =  'Сохранить' %}
+{% else %}
+    {% set label  =  'Добавить' %}
+{% endif %}
+
+{{ form_start(form, {'attr': {'class' : 'message-form'}}) }}
+<div class="form-group col-xs-11">
+    {{ form_widget(form.text, {'attr' : {'rows' : 5, 'class' : 'form-control'}}) }}
+</div>
+<div class="col-xs-1">
+    <button type="submit" class="btn btn-primary">{{ label }}</button>
+</div>
+{{ form_widget(form) }}
+{{ form_end(form) }}
