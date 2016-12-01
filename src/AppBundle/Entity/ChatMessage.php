@@ -1,10 +1,14 @@
 <?php
 
 namespace AppBundle\Entity;
+use AppBundle\Entity\Chat;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups as Groups;
+use UserBundle\Entity\User;
 
 /**
+ * Сообщение в чате
+ *
  * Class ChatMessage
  * @package AppBundle\Entity
  *
@@ -28,7 +32,7 @@ class ChatMessage
     private $chat;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="messages")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="messages")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
     private $user;
@@ -82,11 +86,11 @@ class ChatMessage
     /**
      * Set chat
      *
-     * @param \AppBundle\Entity\Chat $chat
+     * @param Chat $chat
      *
      * @return ChatMessage
      */
-    public function setChat(\AppBundle\Entity\Chat $chat)
+    public function setChat(Chat $chat)
     {
         $this->chat = $chat;
 
@@ -97,7 +101,7 @@ class ChatMessage
      * Get chat
      *
      * @Groups({"Default"})
-     * @return \AppBundle\Entity\Chat
+     * @return Chat
      */
     public function getChat()
     {
@@ -107,11 +111,11 @@ class ChatMessage
     /**
      * Set user
      *
-     * @param \AppBundle\Entity\User $user
+     * @param \UserBundle\Entity\User $user
      *
      * @return ChatMessage
      */
-    public function setUser(\AppBundle\Entity\User $user)
+    public function setUser(User $user)
     {
         $this->user = $user;
 
@@ -122,7 +126,7 @@ class ChatMessage
      * Get user
      *
      * @Groups({"Default"})
-     * @return \AppBundle\Entity\User
+     * @return \UserBundle\Entity\User
      */
     public function getUser()
     {

@@ -2,15 +2,21 @@ app:
     resource: "@AppBundle/Controller/"
     type:     annotation
 
-api:
+api_app:
     type: rest
     resource: "@AppBundle/Controller/API"
+    defaults: {_format: 'html'}
+
+api_user:
+    type: rest
+    resource: "@UserBundle/Controller/API"
     defaults: {_format: 'html'}
 
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
+# Бандл управления соцсетями
 hwi_oauth_security:
     resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
     prefix: /login
@@ -26,5 +32,6 @@ hwi_oauth_redirect:
 facebook_login:
     path: /facebook
 
+# Бандл для @router в JS
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

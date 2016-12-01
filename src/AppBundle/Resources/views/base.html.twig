@@ -1,0 +1,17 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}{% endblock %}
+
+{% block javascripts %}
+    {% javascripts
+    '@AppBundle/Resources/public/js/jquery.min.js'
+    '@AppBundle/Resources/public/js/tether.min.js'
+    '@AppBundle/Resources/public/js/bootstrap.min.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

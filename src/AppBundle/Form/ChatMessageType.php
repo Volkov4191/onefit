@@ -20,7 +20,7 @@ class ChatMessageType extends AbstractType
                 'class' => \AppBundle\Entity\Chat::class
             ])
             ->add('user', EntityHiddenType::class,  [
-                'class' => \AppBundle\Entity\User::class
+                'class' => \UserBundle\Entity\User::class
             ])
         ;
     }

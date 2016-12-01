@@ -1,6 +1,7 @@
-{% extends 'base.html.twig' %}
+{% extends '@App/base.html.twig' %}
 
 {% block stylesheets %}
+    {{ parent() }}
     {% stylesheets '@AppBundle/Resources/public/css/chat/*' filter='cssrewrite' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
@@ -21,7 +22,7 @@
                 <tbody class="user-list">
                     <tr>
                         <td colspan="2">
-                            Загрузка...
+                            <div class="alert alert-info">Загрузка контактов...</div>
                         </td>
                     </tr>
                 </tbody>
@@ -80,38 +81,37 @@
         <script id="tmpl-no-message-alert" type="x-tmpl-mustache">
             <div class="alert alert-success">Здесь будет выводиться история переписки.</div>
         </script>
-
+        <script id="tmpl-no-user-alert" type="x-tmpl-mustache">
+            <div class="alert alert-success">Здесь будет выводиться контакты.</div>
+        </script>
     {% endverbatim %}
 
 {% endblock %}
 
-
-
 {% block javascripts %}
+    {{ parent() }}
+
     {% javascripts
-    '@AppBundle/Resources/public/js/chat/*'
-    '@AppBundle/Resources/public/js/jquery.slimscroll.min.js'
+    '@AppBundle/Resources/public/js/chat/index.js'
     '@AppBundle/Resources/public/js/mustache.min.js'
+    '@AppBundle/Resources/public/js/jquery.slimscroll.min.js'
     %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
-
 
     <script>
         {% set user_id = null %}
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             {% set user_id = app.user.id %}
         {% endif %}
+
         $(function(){
-            var chatId = parseInt('{{ chat.id }}');
-
-            var chat = Chat.init({'id': '{{ chat.id }}', 'user_id' : '{{ user_id }}'});
-
-            Chat.refreshForm('{{ chat.id }}');
-            Chat.updateUserList('{{ chat.id }}');
-            Chat.updateMessageList(chatId);
+            Chat.init({'id': '{{ chat.id }}', 'user_id' : '{{ user_id }}'});
+            Chat.refreshForm();
+            Chat.updateUserList();
+            Chat.updateMessageList();
             setInterval(function(){
-                Chat.updateMessageList(chatId);
+                Chat.updateMessageList();
             }, 5000);
         });
     </script>

@@ -1,9 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends '@App/base.html.twig' %}
 
 {% block body %}
 
     {% if form is defined %}
-        <h1>Chatmessage edit</h1>
+        <h1>Редактирование сообщения</h1>
         {% include '@App/message/form.html.twig' with {'form' : form} %}
     {% else %}
         <div class="alert alert-danger" role="alert">

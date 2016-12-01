@@ -1,7 +1,8 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace UserBundle\Entity;
 
+use AppBundle\Entity\ChatMessage;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
@@ -120,7 +121,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function addMessage(\AppBundle\Entity\ChatMessage $message)
+    public function addMessage(ChatMessage $message)
     {
         $this->messages[] = $message;
 
@@ -132,7 +133,7 @@ class User extends BaseUser
      *
      * @param \AppBundle\Entity\ChatMessage $message
      */
-    public function removeMessage(\AppBundle\Entity\ChatMessage $message)
+    public function removeMessage(ChatMessage $message)
     {
         $this->messages->removeElement($message);
     }

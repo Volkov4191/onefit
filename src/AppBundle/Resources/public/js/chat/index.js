@@ -3,33 +3,28 @@ $(function(){
 
     $body.on('submit', '.message-form', function(event){
         event.preventDefault();
-
         var request = $.ajax({
             url: $(this).attr('action'),
             method: $(this).attr('method'),
             data: $(this).serialize(),
             dataType: "json"
         });
-
         request.done(function( response ) {
-
-            Chat.updateMessageList(response.message.chat.id);
-            Chat.refreshForm(response.message.chat.id);
-
+            Chat.updateMessageList();
+            Chat.refreshForm();
         });
-
         request.fail(function( jqXHR, textStatus ) {
             console.error(jqXHR, textStatus);
         });
-
         return false;
     });
 
     $body.on('click', '.message-edit', function(event){
         return false;
     });
+
     $body.on('mousedown', '.message-edit', function(event){
-        switch (event.which) {
+        switch (event.which) { // при открытии в новой вкладке - открываем форму
             case 2:
             case 3:
                 return true;
@@ -39,15 +34,12 @@ $(function(){
             url: $(this).attr('href') + '.json',
             dataType: "json"
         });
-
         request.done(function( response ) {
             $('.message-form-container').html(response.html);
         });
-
         request.fail(function( jqXHR, textStatus ) {
             console.error(jqXHR, textStatus);
         });
-
         return false;
     });
 
@@ -63,8 +55,11 @@ var Chat = {
         this._id      = options.id;
         this._user_id = options.user_id;
     },
-    updateMessageList: function(chatId){
-        var url = Routing.generate('v1_get_chat_messages', {chatId : chatId, _format : 'json'});
+    /**
+     * Обновляем список сообщений
+     */
+    updateMessageList: function(){
+        var url = Routing.generate('v1_get_chat_messages', {chatId : this._id, _format : 'json'});
         var user_id = this._getUserId();
         var $messageListContainer = this._getMessageListContainer();
 
@@ -74,10 +69,9 @@ var Chat = {
             dataType: "json"
         });
         request.done(function( response ) {
-            console.log(response.items);
 
             $messageListContainer.html('');
-            if (response.items.length == 0){
+            if (response.messages.length == 0){
                 $messageListContainer.html(Mustache.render($('#tmpl-no-message-alert').html()));
                 return false;
             }
@@ -85,7 +79,7 @@ var Chat = {
             var template = $('#tmpl-message-one').html();
             Mustache.parse(template);   // optional, speeds up future uses
 
-            $.each(response.items, function(idx, message){
+            $.each(response.messages, function(idx, message){
                 var edit_url = Routing.generate('v1_get_message_edit', {'id' : message.id});
 
                 var createdAtFormat = '';
@@ -107,8 +101,11 @@ var Chat = {
             console.error(jqXHR, textStatus);
         });
     },
-    updateUserList:function(chatId){
-        var url = Routing.generate('v1_get_chat_users', {chatId : chatId, _format : 'json'});
+    /**
+     * Обновляем список юзеров
+     */
+    updateUserList:function(){
+        var url = Routing.generate('v1_get_users', {chatId : this._id, _format : 'json'});
         var $userListContainer = this._getUserListContainer();
 
         var request = $.ajax({
@@ -117,23 +114,33 @@ var Chat = {
             dataType: "json"
         });
         request.done(function( response ) {
-            console.log(response);
+            $userListContainer.html('');
+            if (response.users.length == 0){
+                $userListContainer.html(Mustache.render($('#tmpl-no-user-alert').html()));
+                return false;
+            }
 
             var template = $('#tmpl-user-one').html();
             Mustache.parse(template);   // optional, speeds up future uses
-            $userListContainer.html('');
             $.each(response.users, function(idx, user){
                 var rendered = Mustache.render(template, {'user': user});
                 $userListContainer.append(rendered);
             });
         });
-
         request.fail(function( jqXHR, textStatus ) {
             console.error(jqXHR, textStatus);
         });
     },
-    refreshForm: function(chatId){
-        var url = Routing.generate( 'v1_get_chat_message_new', {chatId : chatId, _format : 'json'});
+    /**
+     * Обновляем форму добавления комментария
+     *
+     * @returns {boolean}
+     */
+    refreshForm: function(){
+        if (!this._getUserId()){
+            return false;
+        }
+        var url = Routing.generate( 'v1_get_chat_message_new', {chatId : this._id, _format : 'json'});
         var $formContainer =  this._getMessageFromContainer();
         var request = $.ajax({
             url: url,
@@ -158,7 +165,7 @@ var Chat = {
         return $('.message-form-container');
     },
     _getUserId : function(){
-        return this._user_id;
+        return parseInt(this._user_id);
     }
 
 };

@@ -72,7 +72,7 @@ swiftmailer:
 fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
-    user_class: AppBundle\Entity\User
+    user_class: UserBundle\Entity\User
     profile:
         form:
             type:               UserBundle\Form\Type\ProfileFormType # or 'fos_user_profile' on Symfony < 2.8

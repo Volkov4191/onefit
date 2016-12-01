@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends '@App/base.html.twig' %}
 
 {% block body %}
     <div class="row">
@@ -29,13 +29,16 @@
                 </thead>
                 <tbody>
                 {% for chat in chats %}
+                    {% set chatUrl = path('chat_messages', { 'id': chat.id }) %}
                     <tr>
-                        <td class="col-xs-1"><a href="{{ path('chat_show', { 'id': chat.id }) }}">{{ chat.id }}</a></td>
+                        <td class="col-xs-1"><a href="{{ chatUrl }}">{{ chat.id }}</a></td>
                         <td class="col-xs-8">{{ chat.name }}</td>
                         <td class="col-xs-3">
                             <div class="btn-group" role="group" >
-                                <a href="{{ path('chat_messages', { 'id': chat.id }) }}" class="btn btn-primary">Посмотреть</a>
-                                <a href="{{ path('chat_edit', { 'id': chat.id }) }}" class="btn btn-primary">Редактировать</a>
+                                <a href="{{ chatUrl }}" class="btn btn-primary">Посмотреть</a>
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                    <a href="{{ path('chat_edit', { 'id': chat.id }) }}" class="btn btn-primary">Редактировать</a>
+                                {% endif %}
                             </div>
                         </td>
                     </tr>

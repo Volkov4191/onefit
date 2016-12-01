@@ -1,12 +1,12 @@
 <?php
-namespace AppBundle\Security\User;
+namespace UserBundle\Security;
 
-use AppBundle\Entity\User;
 use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Security\Core\User\UserInterface;
+use UserBundle\Entity\User;
 use UserBundle\Service\RandomizerInterface;
 
 /**

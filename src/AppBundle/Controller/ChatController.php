@@ -37,6 +37,8 @@ class ChatController extends Controller
      *
      * @Route("/new", name="chat_new")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function newAction(Request $request)
     {
@@ -58,21 +60,6 @@ class ChatController extends Controller
         ));
     }
 
-    /**
-     * Finds and displays a chat entity.
-     *
-     * @Route("/{id}", name="chat_show")
-     * @Method("GET")
-     */
-    public function showAction(Chat $chat)
-    {
-        $deleteForm = $this->createDeleteForm($chat);
-
-        return $this->render('AppBundle:chat:show.html.twig', array(
-            'chat' => $chat,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
 
     /**
      * Displays a form to edit an existing chat entity.
@@ -82,6 +69,10 @@ class ChatController extends Controller
      */
     public function editAction(Request $request, Chat $chat)
     {
+        if (!$this->getUser()){
+            return $this->redirectToRoute('chat_index');
+        }
+
         $deleteForm = $this->createDeleteForm($chat);
         $editForm = $this->createForm('AppBundle\Form\ChatType', $chat);
         $editForm->handleRequest($request);
@@ -89,7 +80,7 @@ class ChatController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('chat_edit', array('id' => $chat->getId()));
+            return $this->redirectToRoute('chat_index');
         }
 
         return $this->render('AppBundle:chat:edit.html.twig', array(

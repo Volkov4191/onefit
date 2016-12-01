@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups as Groups;
 
 /**
+ * Чат
+ *
  * Class Chat
  * @package AppBundle\Entity
  *
@@ -38,7 +40,7 @@ class Chat
      */
     public function __construct()
     {
-        $this->messages = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->messages = new ArrayCollection();
     }
 
     /**
@@ -84,7 +86,7 @@ class Chat
      *
      * @return Chat
      */
-    public function addMessage(\AppBundle\Entity\ChatMessage $message)
+    public function addMessage(ChatMessage $message)
     {
         $this->messages[] = $message;
 
@@ -96,7 +98,7 @@ class Chat
      *
      * @param \AppBundle\Entity\ChatMessage $message
      */
-    public function removeMessage(\AppBundle\Entity\ChatMessage $message)
+    public function removeMessage(ChatMessage $message)
     {
         $this->messages->removeElement($message);
     }
